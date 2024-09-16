@@ -14,7 +14,7 @@ namespace FreeCourse.Services.Order.Domain.OrderAggregate
 
         public Order()
         {
-            
+
         }
         public Order(string buyerId, Address address)
         {

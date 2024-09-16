@@ -6,4 +6,7 @@ Services
 - http://localhost:5015 => Order
 - http://localhost:5016 => FakePayment
 
+Gateways
+- http://localhost:5000 => Gateway
+
 http://localhost:5001 => IdentityServer4

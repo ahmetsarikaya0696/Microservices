@@ -6,7 +6,7 @@ namespace FreeCourse.Services.Order.Domain.OrderAggregate
     {
         public OrderItem()
         {
-            
+
         }
 
         public OrderItem(string productId, string productName, string pictureUrl, decimal price)

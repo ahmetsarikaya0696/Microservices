@@ -48,7 +48,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeCourse.Services.Order.I
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FakePayment", "FakePayment", "{38ED0F6F-512C-47D5-AD4D-AE3887B83DA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.FakePayment", "Services\FakePayment\FreeCourse.Services.FakePayment\FreeCourse.Services.FakePayment.csproj", "{7D9351F1-8E5A-41F0-822C-3324754FCB04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeCourse.Services.FakePayment", "Services\FakePayment\FreeCourse.Services.FakePayment\FreeCourse.Services.FakePayment.csproj", "{7D9351F1-8E5A-41F0-822C-3324754FCB04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{5BB6CAD4-EB34-479C-BCA5-23B24FE94374}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Gateway", "Gateways\FreeCourse.Gateway\FreeCourse.Gateway.csproj", "{1773612D-B483-4D63-9539-925CE2DE5BCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,6 +108,10 @@ Global
 		{7D9351F1-8E5A-41F0-822C-3324754FCB04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D9351F1-8E5A-41F0-822C-3324754FCB04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D9351F1-8E5A-41F0-822C-3324754FCB04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1773612D-B483-4D63-9539-925CE2DE5BCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1773612D-B483-4D63-9539-925CE2DE5BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1773612D-B483-4D63-9539-925CE2DE5BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1773612D-B483-4D63-9539-925CE2DE5BCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -127,6 +135,7 @@ Global
 		{736AEE73-8CF9-4A98-B764-3700C6044AA2} = {8D9E822A-3AAB-41E0-BE37-060EE9FAEEF9}
 		{38ED0F6F-512C-47D5-AD4D-AE3887B83DA3} = {F4E35CD4-CCFE-4416-B7B4-BEBB856A82E8}
 		{7D9351F1-8E5A-41F0-822C-3324754FCB04} = {38ED0F6F-512C-47D5-AD4D-AE3887B83DA3}
+		{1773612D-B483-4D63-9539-925CE2DE5BCD} = {5BB6CAD4-EB34-479C-BCA5-23B24FE94374}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7228FAA4-4D27-461F-9567-CF44BF9FC402}
