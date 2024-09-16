@@ -1,0 +1,9 @@
+Services
+- http://localhost:5011 => Catalog
+- http://localhost:5012 => Photostock
+- http://localhost:5013 => Basket
+- http://localhost:5014 => Discount
+- http://localhost:5015 => Order
+- http://localhost:5016 => FakePayment
+
+http://localhost:5001 => IdentityServer4
