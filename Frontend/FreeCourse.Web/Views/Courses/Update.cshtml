@@ -1,0 +1,57 @@
+﻿@model CourseUpdateInput
+@{
+    ViewData["Title"] = "Update";
+}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Kurs Güncelleme</h5>
+                <hr />
+                <form asp-controller="Courses" asp-action="Update" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <input type="hidden" asp-for="Id">
+                    <div class="mb-3 row">
+                        <label asp-for="CategoryId" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <select asp-for="CategoryId" class="form-control form-select" asp-items="@ViewBag.Categories">
+                                <option value="">Kategori Seçiniz</option>
+                            </select>
+                            <span class="text-danger" asp-validation-for="CategoryId"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Name">
+                            <span class="text-danger" asp-validation-for="Name"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label asp-for="Price" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Price">
+                            <span class="text-danger" asp-validation-for="Price"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label asp-for="Description" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <textarea asp-for="Description" class="form-control"></textarea>
+                            <span class="text-danger" asp-validation-for="Description"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label asp-for="Feature.Duration" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Feature.Duration">
+                            <span class="text-danger" asp-validation-for="Feature.Duration"></span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Güncelle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

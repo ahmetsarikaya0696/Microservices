@@ -9,4 +9,7 @@ Services
 Gateways
 - http://localhost:5000 => Gateway
 
+Web
+- http://localhost:5010 => Web
+
 http://localhost:5001 => IdentityServer4

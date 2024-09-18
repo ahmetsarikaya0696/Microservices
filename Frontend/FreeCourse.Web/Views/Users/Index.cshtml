@@ -1,0 +1,36 @@
+﻿@model UserVM
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="row">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Kullanıcı Adı</th>
+                            <th scope="col">Şehir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.Id</td>
+                            <td>@Model.Email</td>
+                            <td>@Model.UserName</td>
+                            <td>@Model.City</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="list-group">
+            <a asp-controller="Courses" asp-action="Index" class="list-group-item list-group-item-action">Kurslarım</a>
+        </div>
+    </div>
+</div>
