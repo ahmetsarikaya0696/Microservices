@@ -96,7 +96,7 @@ namespace FreeCourse.Services.Catalog.Services
 
         public async Task<ResponseDTO<NoContentDTO>> DeleteAsync(string id)
         {
-            var result = await _courseCollection.DeleteOneAsync(id);
+            var result = await _courseCollection.DeleteOneAsync(x => x.Id == id);
 
             if (result.DeletedCount > 0) return ResponseDTO<NoContentDTO>.Success(204);
 

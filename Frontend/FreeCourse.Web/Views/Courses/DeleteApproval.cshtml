@@ -1,0 +1,30 @@
+﻿@model CourseVM
+@{
+    ViewData["Title"] = "DeleteApproval";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Silme İşlemi</h5>
+                <hr />
+                <div class="alert alert-danger">
+                    <div class="mb-3">
+                        @Model.Name adlı kurs silinecektir. Onaylıyor musunuz?
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a asp-controller="Courses" asp-action="Index" class="btn btn-outline-danger">İptal</a>
+                        <form asp-controller="Courses" asp-action="Delete" method="post">
+                            <input type="hidden" asp-for="Id"/>
+                            <button type="submit" class="btn btn-danger">Evet, Sil</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -29,12 +29,15 @@
                             @foreach (var course in Model)
                             {
                                 <tr>
-                                    <td></td>
+                                    <td>
+                                        <img style="width:72px;" class="img-thumbnail" src="@course.PictureUrl" />
+                                    </td>
                                     <td>@course.Name</td>
                                     <td>@course.Price</td>
                                     <td>@course.Feature.Duration</td>
                                     <td>
                                         <a class="btn btn-success" asp-controller="Courses" asp-action="Update" asp-route-id="@course.Id">Güncelle</a>
+                                        <a class="btn btn-danger" asp-controller="Courses" asp-action="DeleteApproval" asp-route-id="@course.Id">Sil</a>
                                     </td>
                                 </tr>
                             }

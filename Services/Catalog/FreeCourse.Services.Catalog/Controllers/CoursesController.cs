@@ -14,6 +14,14 @@ namespace FreeCourse.Services.Catalog.Controllers
             _courseService = courseService;
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var response = await _courseService.GetAllAsync();
+            return CreateActionResult(response);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {

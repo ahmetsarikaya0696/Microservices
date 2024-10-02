@@ -66,6 +66,7 @@ namespace FreeCourse.Web.Controllers
             CourseUpdateInput courseUpdateInput = new CourseUpdateInput()
             {
                 Id = course.Id,
+                UserId = _sharedIdentityService.GetUserId,
                 Name = course.Name,
                 Price = course.Price,
                 Picture = course.Picture,
@@ -99,6 +100,19 @@ namespace FreeCourse.Web.Controllers
                 return View(courseUpdateInput);
             }
 
+            return RedirectToAction(nameof(Index), "Courses");
+        }
+
+        public async Task<IActionResult> DeleteApproval(string id)
+        {
+            var course = await _catalogService.GetCourseByCourseIdAsync(id);
+            return View(course);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _catalogService.DeleteCourseAsync(id);
             return RedirectToAction(nameof(Index), "Courses");
         }
     }
