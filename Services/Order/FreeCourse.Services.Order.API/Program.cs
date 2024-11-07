@@ -1,5 +1,7 @@
+using FreeCourse.Services.Order.Application.Consumers;
 using FreeCourse.Services.Order.Infrastructure;
 using FreeCourse.Shared.Services;
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -8,6 +10,27 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.JsonWebTokens;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer<CreateOrderMessageCommandConsumer>();
+
+    x.UsingRabbitMq((context, config) =>
+    {
+        // Default port => 5672
+        config.Host(builder.Configuration["RabbitMQUrl"], "/", host =>
+        {
+            host.Username("guest");
+            host.Password("guest");
+        });
+
+        config.ReceiveEndpoint("create-order-service", e =>
+        {
+            e.ConfigureConsumer<CreateOrderMessageCommandConsumer>(context);
+        });
+    });
+});
+
 
 // Add services to the container.
 JsonWebTokenHandler.DefaultInboundClaimTypeMap.Clear();

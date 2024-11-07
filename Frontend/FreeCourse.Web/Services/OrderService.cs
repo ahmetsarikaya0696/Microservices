@@ -88,9 +88,53 @@ namespace FreeCourse.Web.Services
             return response.Data;
         }
 
-        public Task SuspendOrder(CheckoutInfoInput checkoutInfoInput)
+        public async Task<OrderSuspendVM> SuspendOrder(CheckoutInfoInput checkoutInfoInput)
         {
-            throw new NotImplementedException();
+            var basket = await _basketService.Get();
+
+            var orderCreateInput = new OrderCreateInput()
+            {
+                BuyerId = _sharedIdentityService.GetUserId,
+                Address = new AddressCreateInput()
+                {
+                    Province = checkoutInfoInput.Province,
+                    District = checkoutInfoInput.District,
+                    Line = checkoutInfoInput.Line,
+                    Street = checkoutInfoInput.Street,
+                    ZipCode = checkoutInfoInput.ZipCode,
+                },
+                OrderItems = basket.BasketItems.Select(x => new OrderItemCreateInput()
+                {
+                    ProductId = x.CourseId,
+                    Price = x.GetCurrentPrice,
+                    ProductName = x.CourseName,
+                    PictureUrl = string.Empty,
+                }).ToList()
+            };
+
+            var payment = new PaymentInfoInput()
+            {
+                CardName = checkoutInfoInput.CardName,
+                CardNumber = checkoutInfoInput.CardNumber,
+                CVV = checkoutInfoInput.CVV,
+                Expiration = checkoutInfoInput.Expiration,
+                TotalPrice = basket.TotalPrice,
+                Order = orderCreateInput,
+            };
+
+            var responsePayment = await _paymentService.ReceivePayment(payment);
+
+            if (!responsePayment)
+            {
+                return new OrderSuspendVM()
+                {
+                    Error = "Ödeme alınamadı!",
+                    IsSuccessfull = false
+                };
+            }
+
+            await _basketService.Delete();
+            return new OrderSuspendVM() { IsSuccessfull = true };
         }
     }
 }
