@@ -3,6 +3,8 @@ using FreeCourse.Services.Catalog.DTOs;
 using FreeCourse.Services.Catalog.Model;
 using FreeCourse.Services.Catalog.Settings;
 using FreeCourse.Shared.DTOs;
+using FreeCourse.Shared.Messages;
+using MassTransit;
 using MongoDB.Driver;
 
 namespace FreeCourse.Services.Catalog.Services
@@ -12,8 +14,9 @@ namespace FreeCourse.Services.Catalog.Services
         private readonly IMongoCollection<Course> _courseCollection;
         private readonly IMongoCollection<Category> _categoryCollection;
         private readonly IMapper _mapper;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public CourseService(IMapper mapper, IDatabaseSettings databaseSettings)
+        public CourseService(IMapper mapper, IDatabaseSettings databaseSettings, IPublishEndpoint publishEndpoint)
         {
             var client = new MongoClient(databaseSettings.ConnectionString);
             var database = client.GetDatabase(databaseSettings.DatabaseName);
@@ -21,6 +24,7 @@ namespace FreeCourse.Services.Catalog.Services
             _categoryCollection = database.GetCollection<Category>(databaseSettings.CategoryCollectionName);
 
             _mapper = mapper;
+            _publishEndpoint = publishEndpoint;
         }
 
         public async Task<ResponseDTO<List<CourseDTO>>> GetAllAsync()
@@ -90,6 +94,8 @@ namespace FreeCourse.Services.Catalog.Services
             var result = await _courseCollection.FindOneAndReplaceAsync(x => x.Id == courseUpdateDTO.Id, updateCourse);
 
             if (result == null) return ResponseDTO<NoContentDTO>.Fail($"Course not found (Id = {courseUpdateDTO.Id})", 404);
+
+            await _publishEndpoint.Publish(new CourseNameChangedEvent() { CourseId = updateCourse.Id, UpdatedName = courseUpdateDTO.Name });
 
             return ResponseDTO<NoContentDTO>.Success(204);
         }

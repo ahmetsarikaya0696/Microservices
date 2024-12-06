@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<CreateOrderMessageCommandConsumer>();
+    x.AddConsumer<CourseNameChangedEventConsumer>();
 
     x.UsingRabbitMq((context, config) =>
     {
@@ -27,6 +28,11 @@ builder.Services.AddMassTransit(x =>
         config.ReceiveEndpoint("create-order-service", e =>
         {
             e.ConfigureConsumer<CreateOrderMessageCommandConsumer>(context);
+        });
+
+        config.ReceiveEndpoint("course-name-changed-event-order-service", e =>
+        {
+            e.ConfigureConsumer<CourseNameChangedEventConsumer>(context);
         });
     });
 });
